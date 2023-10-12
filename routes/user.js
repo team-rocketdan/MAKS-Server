@@ -29,9 +29,8 @@ router.get('/:id/:type', (req, res) => {
     }  
 });
 
-router.get('/:id/:type/:field/:data', (req, res) => { // 사용자 정보 수정
+router.get('/:id/:field/:data', (req, res) => { // 사용자 정보 수정
     console.log(req.params.id);
-    console.log(req.params.type);
     console.log(req.params.field);
     console.log(req.params.data);
 

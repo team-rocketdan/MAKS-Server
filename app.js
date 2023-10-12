@@ -17,7 +17,6 @@ app.use('/market', marketRouter);
 app.use('/menu', menuRouter);
 app.use('/orders', orderRouter);
 
-
 app.listen(app.get('port'), () => {
     console.log('express server listening on port' + app.get('port'));
 });

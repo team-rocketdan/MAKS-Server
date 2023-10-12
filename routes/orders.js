@@ -23,7 +23,7 @@ router.get('/:uid/:mkid', (req, res) => {
     uid=req.params.uid;
     mkid=req.params.mkid;
     price=req.query.price;
-    menus=JSON.parse(req.query.menus); // aa,bb
+    menus=JSON.stringify(req.query.menus); // aa,bb
     console.log(menus);
 
     
@@ -41,7 +41,7 @@ router.get('/:uid/:mkid', (req, res) => {
     });
 });
 
-router.get('/:id/:type', (req, res) => {
+router.get('/:id/:type/:differ', (req, res) => {
     console.log(req.params.id);
     console.log(req.params.type);
 
