@@ -41,21 +41,42 @@ router.get('/:uid/:mkid', (req, res) => {
     });
 });
 
-router.get('/:id/:type/:differ', (req, res) => {
-    console.log(req.params.id);
-    console.log(req.params.type);
+router.get('/:type1/:type2/:var', (req, res) => {
+    console.log(req.params.type1);
+    console.log(req.params.type2);
+    console.log(req.params.var);
 
-    if(req.params.type == 'read') { // 사용자 주문 조회
-        var sql = `select * from orders where O_ID = ${req.params.id}`;
-        conn.query(sql, (err, rows) => {
-            if(err) {
-                throw err;
-            }
-            console.log(rows);
-            res.send(rows);
-        });
-    } else if(req.params.type == 'delete') { // 현재 주문 취소
-        var sql = `delete from orders where O_ID = ${req.params.id}`;
+    if(req.params.type1 == 'read') {
+        if(req.params.type2=='oid'){
+            var sql = `select * from orders where O_ID = ${req.params.var}`;
+            conn.query(sql, (err, rows) => {
+                if(err) {
+                    throw err;
+                }
+                console.log(rows);
+                res.send(rows);
+            });
+        }else if(req.params.type2=='mkid'){
+            var sql = `select * from orders where MK_ID = ${req.params.var} order by C_AT desc`;
+            conn.query(sql, (err, rows) => {
+                if(err) {
+                    throw err;
+                }
+                console.log(rows);
+                res.send(rows);
+            });
+        }else if(req.params.type2=='uid'){
+            var sql = `select * from orders where U_ID = '${req.params.var}' order by C_AT desc`;
+            conn.query(sql, (err, rows) => {
+                if(err) {
+                    throw err;
+                }
+                console.log(rows);
+                res.send(rows);
+            });
+        }
+    } else if(req.params.type1 == 'delete') { // 주문 정보 삭제
+        var sql = `delete from orders where O_ID = ${req.params.var}`;
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
