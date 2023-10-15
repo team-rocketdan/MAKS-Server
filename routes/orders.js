@@ -48,7 +48,7 @@ router.get('/:type1/:type2/:var', (req, res) => {
 
     if(req.params.type1 == 'read') {
         if(req.params.type2=='oid'){
-            var sql = `select * from orders where O_ID = ${req.params.var}`;
+            var sql = `select * from ORDERS where O_ID = ${req.params.var}`;
             conn.query(sql, (err, rows) => {
                 if(err) {
                     throw err;
@@ -57,7 +57,7 @@ router.get('/:type1/:type2/:var', (req, res) => {
                 res.send(rows);
             });
         }else if(req.params.type2=='mkid'){
-            var sql = `select * from orders where MK_ID = ${req.params.var} order by C_AT desc`;
+            var sql = `select * from ORDERS where MK_ID = ${req.params.var} order by C_AT desc`;
             conn.query(sql, (err, rows) => {
                 if(err) {
                     throw err;
@@ -66,7 +66,7 @@ router.get('/:type1/:type2/:var', (req, res) => {
                 res.send(rows);
             });
         }else if(req.params.type2=='uid'){
-            var sql = `select * from orders where U_ID = '${req.params.var}' order by C_AT desc`;
+            var sql = `select * from ORDERS where U_ID = '${req.params.var}' order by C_AT desc`;
             conn.query(sql, (err, rows) => {
                 if(err) {
                     throw err;
