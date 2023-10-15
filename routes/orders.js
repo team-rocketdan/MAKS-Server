@@ -76,7 +76,7 @@ router.get('/:type1/:type2/:var', (req, res) => {
             });
         }
     } else if(req.params.type1 == 'delete') { // 주문 정보 삭제
-        var sql = `delete from orders where O_ID = ${req.params.var}`;
+        var sql = `delete from ORDERS where O_ID = ${req.params.var}`;
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
