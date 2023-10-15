@@ -9,7 +9,7 @@ router.get('/:type/:uid', (req, res) => {
     console.log(req.params.uid);
 
     if(req.params.type == 'read') { // 사용자 정보 조회
-        var sql = `select * from user where U_ID = '${req.params.uid}'`;
+        var sql = `select * from USER where U_ID = '${req.params.uid}'`;
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
@@ -18,7 +18,7 @@ router.get('/:type/:uid', (req, res) => {
             res.send(rows);
         });
     } else if(req.params.type == 'delete') { // 사용자 정보 삭제
-        var sql = `delete from user where U_ID = '${req.params.uid}'`;
+        var sql = `delete from USER where U_ID = '${req.params.uid}'`;
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
@@ -34,7 +34,7 @@ router.get('/:id/:field/:data', (req, res) => { // 사용자 정보 수정
     console.log(req.params.field);
     console.log(req.params.data);
 
-    var sql = `update user set ${req.params.field} = '${req.params.data}' where U_ID = '${req.params.id}'`;
+    var sql = `update USER set ${req.params.field} = '${req.params.data}' where U_ID = '${req.params.id}'`;
     conn.query(sql, (err, rows) => {
         if(err) {
             throw err;

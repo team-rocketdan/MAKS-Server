@@ -31,7 +31,7 @@ router.get('/:uid/:mkid', (req, res) => {
         req.query.menus[0];
     }
     oid=Math.floor(Math.random() * 1000001);
-    var sql = `insert into orders values (${oid}, json_object('list', json_array('${menus[0]}','${menus[1]}')), ${price}, default, 0, 'ing', '${uid}', ${mkid})`;
+    var sql = `insert into ORDERS values (${oid}, json_object('list', json_array('${menus[0]}','${menus[1]}')), ${price}, default, 0, 'ing', '${uid}', ${mkid})`;
     conn.query(sql, (err, rows) => {
         if(err) {
             throw err;

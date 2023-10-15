@@ -9,7 +9,7 @@ router.get('/:type/:var', (req, res) => {
     console.log(req.params.var);
 
     if(req.params.type=='mkid'){ // 마켓 ID로 가게 조회
-        var sql = `select * from market where MK_ID = ${req.params.var}`;
+        var sql = `select * from MARKET where MK_ID = ${req.params.var}`;
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
