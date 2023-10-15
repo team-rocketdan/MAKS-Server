@@ -18,7 +18,7 @@ router.get('/:type/:var', (req, res) => {
             res.send(rows);
         })
     } else if(req.params.type=='name'){ // 이름에 단어 포함된 마켓 조회
-        var sql = `select * from market where NAME like '%${req.params.var}%'`;
+        var sql = `select * from MARKET where NAME like '%${req.params.var}%'`;
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
