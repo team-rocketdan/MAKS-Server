@@ -10,7 +10,7 @@ var orderRouter = require('./routes/orders');
 
 var app = express();
 
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3002);
 
 app.use('/user', userRouter);
 app.use('/market', marketRouter);
