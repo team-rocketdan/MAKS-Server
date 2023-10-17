@@ -14,24 +14,25 @@ router.post('/', (req, res) => {
     const email = body.email;
 }) */
 
-router.get('/:uid/:mkid', (req, res) => {
+router.get('/:uid/:mkid/:price', (req, res) => {
     console.log(req.params.uid);
     console.log(req.params.mkid);
-    console.log(req.query.menus); // ["aa","bb"]
-    console.log(req.query.price);
+    console.log(req.params.price);
+    console.log(req.query.ids); // ["23540697":1,"64100526":3]
+    console.log(req.query.counts);
 
     uid=req.params.uid;
     mkid=req.params.mkid;
-    price=req.query.price;
-    menus=JSON.stringify(req.query.menus); // aa,bb
-    console.log(menus);
+    price=req.params.price;
 
-    
-    for(i=0; i<req.query.menus.length; i++) { // 사용자 주문
-        req.query.menus[0];
-    }
     oid=Math.floor(Math.random() * 1000001);
-    var sql = `insert into ORDERS values (${oid}, json_object('list', json_array('${menus[0]}','${menus[1]}')), ${price}, default, 0, 'ing', '${uid}', ${mkid})`;
+    
+    /* for(i=0; i<req.query.ids.length; i++) {
+        // 메뉴 개수에 따라 변경
+    } */
+    
+    var sql = `insert into ORDERS values (${oid}, 
+        '{"${req.query.ids[0]}": ${req.query.counts[0]}, "${req.query.ids[1]}": ${req.query.counts[1]}}', ${price}, default, 0, 'ing', '${uid}', ${mkid})`;
     conn.query(sql, (err, rows) => {
         if(err) {
             throw err;
