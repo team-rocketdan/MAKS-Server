@@ -14,16 +14,16 @@ router.post('/', (req, res) => {
     const email = body.email;
 }) */
 
-router.get('/:uid/:mkid/:price', (req, res) => {
+router.get('/:uid/:mkid', (req, res) => {
     console.log(req.params.uid);
     console.log(req.params.mkid);
-    console.log(req.params.price);
+    console.log(req.query.price);
     console.log(req.query.ids); // ["23540697":1,"64100526":3]
     console.log(req.query.counts);
 
     uid=req.params.uid;
     mkid=req.params.mkid;
-    price=req.params.price;
+    price=req.query.price;
 
     oid=Math.floor(Math.random() * 1000001);
     
