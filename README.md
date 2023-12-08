@@ -3,7 +3,23 @@
 * Amazon RDS Instance와 MySQL Server를 연결한다.     
 * MySQL Workbench Connection 내에서 SQL 쿼리를 작성하여 Database를 설계한다.
 * 자세한 방법은 https://melody2108-20.tistory.com/3 의 첫번째, 두번째 파트를 참고한다.
-* 이하는 필자가 설계한 Database의 Table 목록이다.
+* 이하는 필자가 설계한 Database의 Table 목록으로, 소스코드 형식은 아래와 같다.
+
+```
+create table USER (
+     id varchar(20) not null, 
+     name varchar(200) not null,
+     email varchar(40) not null,
+     loginCenter varchar(10),
+     profileImage varchar(200) default '',
+     createdAt datetime default now(),
+     primary key(id)
+) default charset = utf8mb4;
+
+insert into USER values
+('heroes51', '이정후', 'heroes51@gmail.com', 'kakao', default, '2020-08-12 12:12:17'),
+('tigers47', '나성범', 'tigers47@gmail.com', 'apple', default, default);
+  ```
  
 <h3>USER</h3>
 
@@ -176,7 +192,3 @@ router.get('/:type/:var', (req, res) => {
 * Amazon EC2에 서버를 배포하여 Data 및 사용자 입력이 잘 반영되는지 테스트한다.
 * 특정 운영체제 및 애플리케이션을 실행하는 독립적인 환경인 인스턴스를 이용한다.
 * 자세한 방법은 https://melody2108-20.tistory.com/3 의 <Amazon EC2에 서버 배포> 파트를 참고한다.
-
-
-사용 방법 넣고~
-AWS 주소~
