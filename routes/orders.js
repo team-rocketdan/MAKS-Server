@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/:uid/:mkid', (req, res) => {
     console.log(req.query.ids); // ["23540697":1,"64100526":3]
     console.log(req.query.counts);
+    console.log(req.query.ids.length);
 
     oid=Math.floor(Math.random() * 1000001);
     uid=req.params.uid;
@@ -16,14 +17,13 @@ router.get('/:uid/:mkid', (req, res) => {
     
     for (i=0; i<req.query.ids.length; i++) {
         if (i=0) {
-            var json = `{"${req.query.ids[0]}": ${req.query.counts[0]}}`
-
+            var json = `{"${req.query.ids[0]}": ${req.query.counts[0]}}`;
         } else {
             json.req.query.ids[i] = req.query.counts[i];
         }
     }
     
-    var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default, json, ${price}, 0, 'ing')`
+    var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default, json, ${price}, 0, 'ing')`;
 
     /*var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default,
         '{"${req.query.ids[0]}": ${req.query.counts[0]}, "${req.query.ids[1]}": ${req.query.counts[1]}}', ${price}, 0, 'ing')`; */
