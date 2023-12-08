@@ -3,8 +3,9 @@
 * Amazon RDS Instance와 MySQL Server를 연결한다.     
 * MySQL Workbench Connection 내에서 SQL 쿼리를 작성하여 Database를 설계한다.
 * 자세한 방법은 https://melody2108-20.tistory.com/3 링크를 참고한다.
+* 아래는 필자가 설계한 Database의 Table 목록이다.
  
-<h3>USER Table</h3>
+<h2>USER</h2>
 
 |id|name|email|loginCenter|profileImage|createdAt|
 |--|----|-----|-----------|------------|---------|
@@ -18,7 +19,7 @@
 >  profileImage -- VARCHAR(200)      
 >  createdAt -- DATETIME     
 
-<h3>MANAGER Table</h3>
+<h2>MANAGER</h2>
 
 |id|name|tel|businessNumber|
 |--|----|---|--------------|
@@ -30,7 +31,7 @@
 >  tel -- VARCHAR(20)        
 >  businessNumber -- VARCHAR(30)     
 
-<h3>MARKET Table</h3>
+<h2>MARKET</h2>
 
 |id|name|coverImage|coordinate|status|
 |--|----|----------|----------|------|
@@ -43,7 +44,7 @@
 >  coordinate -- POINT       
 >  status -- VARCHAR(10)   
 
-<h3>MENU Table</h3>
+<h2>MENU</h2>
 
 |id|marketID|name|price|description|image|
 |--|--------|----|-----|-----------|-----|
@@ -61,7 +62,7 @@
 >  description -- VARCHAR(200)      
 >  image -- VARCHAR(200)          
 
-<h3>ORDERS Table</h3>
+<h2>ORDERS</h2>
 
 |id|userID|marketID|createdAt|menus|totalPrice|isTakeout|status|
 |--|------|--------|---------|-----|----------|---------|------|
@@ -77,6 +78,27 @@
 >  isTakeout -- TINYINT     
 >  status -- VARCHAR(10)    
 
+<h1>Source Code</h1>
+
+<h3>database.js</h3>
+
+```
+module.exports = {
+    host: 'maks-database.cqfnpacnwfir.ap-northeast-2.rds.amazonaws.com',
+    user: 'user',
+    password: 'password',
+    database: 'database'
+};
+```
+
+* host? 사용자가 이용한 Amazon RDS Instance의 엔드포인트
+* user? 사용자가 설정한 이름
+* password? 사용자가 설정한 비밀번호
+* database? 사용자가 설계한 Database의 이름
+
+```
+
+```
 
 사용 방법 넣고~
 
