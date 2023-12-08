@@ -1,7 +1,7 @@
 <h1>Database</h1>
 
 * Amazon RDS Instance와 MySQL Server를 연결한다.     
-* MySQL Workbench Connection 내에서 쿼리를 작성하여 Database를 설계한다.
+* MySQL Workbench Connection 내에서 SQL 쿼리를 작성하여 Database를 설계한다.
 * 자세한 방법은 https://melody2108-20.tistory.com/3 링크를 참고한다.
  
 <h3>USER Table</h3>
