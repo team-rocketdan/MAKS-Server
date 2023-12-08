@@ -5,10 +5,7 @@ var conn = mysql.createConnection(dbInfo);
 var router = express.Router();
 
 router.get('/:type/:uid', (req, res) => {
-    console.log(req.params.type);
-    console.log(req.params.uid);
-
-    if(req.params.type == 'read') { // 사용자 정보 조회
+    if(req.params.type == 'read') { // id에 해당하는 사용자 정보 조회
         var sql = `select * from USER where id = '${req.params.uid}'`; // u
         conn.query(sql, (err, rows) => {
             if(err) {
@@ -17,7 +14,7 @@ router.get('/:type/:uid', (req, res) => {
             console.log(rows);
             res.send(rows);
         });
-    } else if(req.params.type == 'delete') { // 사용자 정보 삭제
+    } else if(req.params.type == 'delete') { // id에 해당하는 사용자 정보 삭제
         var sql = `delete from USER where id = '${req.params.uid}'`; // u
         conn.query(sql, (err, rows) => {
             if(err) {
@@ -29,12 +26,8 @@ router.get('/:type/:uid', (req, res) => {
     }  
 });
 
-router.get('/:id/:field/:data', (req, res) => { // 사용자 정보 수정
-    console.log(req.params.id);
-    console.log(req.params.field);
-    console.log(req.params.data);
-
-    var sql = `update USER set ${req.params.field} = '${req.params.data}' where id = '${req.params.id}'`; // u
+router.get('/:id/:field/:data', (req, res) => { // id에 해당하는 사용자 정보 수정
+    var sql = `update USER set ${req.params.field} = '${req.params.data}' where id = '${req.params.id}'`;
     conn.query(sql, (err, rows) => {
         if(err) {
             throw err;

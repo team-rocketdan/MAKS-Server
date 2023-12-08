@@ -6,9 +6,6 @@ var conn = mysql.createConnection(dbInfo);
 var router = express.Router();
 
 router.get('/:uid/:mkid', (req, res) => {
-    console.log(req.params.uid);
-    console.log(req.params.mkid);
-    console.log(req.query.price);
     console.log(req.query.ids); // ["23540697":1,"64100526":3]
     console.log(req.query.counts);
 
@@ -35,7 +32,6 @@ router.get('/:uid/:mkid', (req, res) => {
         if(err) {
             throw err;
         }
-
         console.log(rows);
         res.send(rows);
     });
@@ -43,7 +39,7 @@ router.get('/:uid/:mkid', (req, res) => {
 
 router.get('/:type1/:type2/:var', (req, res) => {
     if(req.params.type1 == 'read') {
-        if(req.params.type2=='oid'){
+        if(req.params.type2=='oid'){ // id에 해당하는 주문 정보 조회
             var sql = `select * from ORDERS where id = ${req.params.var}`; // o
             conn.query(sql, (err, rows) => {
                 if(err) {
@@ -52,7 +48,7 @@ router.get('/:type1/:type2/:var', (req, res) => {
                 console.log(rows);
                 res.send(rows);
             });
-        }else if(req.params.type2=='mkid'){
+        }else if(req.params.type2=='mkid'){ // marketID에 해당하는 매장의 주문 정보 조회
             var sql = `select * from ORDERS where marketID = ${req.params.var} order by createdAt desc`; // mk, c_at
             conn.query(sql, (err, rows) => {
                 if(err) {
@@ -61,7 +57,7 @@ router.get('/:type1/:type2/:var', (req, res) => {
                 console.log(rows);
                 res.send(rows);
             });
-        }else if(req.params.type2=='uid'){
+        }else if(req.params.type2=='uid'){ // userID에 해당하는 사용자의 주문 정보 조회
             var sql = `select * from ORDERS where userID = '${req.params.var}' order by createdAt desc`; // u, c_at
             conn.query(sql, (err, rows) => {
                 if(err) {
@@ -71,8 +67,8 @@ router.get('/:type1/:type2/:var', (req, res) => {
                 res.send(rows);
             });
         }
-    } else if(req.params.type1 == 'delete') { // 주문 정보 삭제
-        var sql = `delete from ORDERS where id = ${req.params.var}`; // o
+    } else if(req.params.type1 == 'delete') { // id에 해당하는 주문 정보 삭제
+        var sql = `delete from ORDERS where id = ${req.params.var}`;
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
