@@ -15,7 +15,7 @@ router.get('/:uid/:mkid', (req, res) => {
     mkid=req.params.mkid;
     price=req.query.price;
     
-    for (i=0; i<req.query.ids.length; i++) {
+    /*for (i=0; i<req.query.ids.length; i++) {
         if (i=0) {
             const json = `{"${req.query.ids[0]}": ${req.query.counts[0]}}`;
         } else if (i>0) {
@@ -23,10 +23,10 @@ router.get('/:uid/:mkid', (req, res) => {
         }
     }
     
-    var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default, json, ${price}, 0, 'ing')`;
+    var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default, json, ${price}, 0, 'ing')`;*/
 
-    /*var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default,
-        '{"${req.query.ids[0]}": ${req.query.counts[0]}, "${req.query.ids[1]}": ${req.query.counts[1]}}', ${price}, 0, 'ing')`; */
+    var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default,
+        '{"${req.query.ids[0]}": ${req.query.counts[0]}, "${req.query.ids[1]}": ${req.query.counts[1]}}', ${price}, 0, 'ing')`; 
     
         conn.query(sql, (err, rows) => {
         if(err) {

@@ -10,7 +10,7 @@ var orderRouter = require('./routes/orders');
 
 var app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3004);
 
 app.use('/user', userRouter);
 app.use('/market', marketRouter);
@@ -18,7 +18,7 @@ app.use('/menu', menuRouter);
 app.use('/orders', orderRouter);
 
 app.listen(app.get('port'), () => {
-    console.log('express server listening on port' + app.get('port'));
+    console.log('express server listening on port ' + app.get('port'));
 });
 
 /* module.exports = app; */
