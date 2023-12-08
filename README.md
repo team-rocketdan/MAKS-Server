@@ -146,12 +146,35 @@ router.get('/:type/:var', (req, res) => {
 
 module.exports = router;
 ```
+
 3. 필자는 routes 폴더 아래에서 Router를 exports하는 파일들을 모아 관리한다. 해당 파일들의 기본 구조는 위와 같고, app.js 파일에서처럼 필요한 모듈들을 require 함수로 불러와 사용한다. 중요한 것은 router.get 블록 속의 내용이다. /:--- 형식으로 사용자로부터 정보를 받으면 req.params 객체 아래에 변수로 저장되는데, 위에서는 /:type의 정보가 req.params.type 변수에 저장된 것이다.
-4. 이를 if문의 분기로 활용하거나 sql 문의 where 조건에서 사용한다. sql문은 ``(백틱)으로 선언되고, 해당 Router에서 구현할 기능에 따라 적절한 MySQL 문법으로 작성된다. 또한 sql문 안에서는 ${변수} 형식을 통해 변수를 사용할 수 있다. conn 객체를 활용하여 sql문을 실행하면 기능 구현이 완료되고, 마지막으로 Router를 exports하며 끝맺는다.
+     
+5. 변수는 if문의 분기나 sql 문의 where 조건에 활용된다. sql문은 ``(백틱)으로 선언되고, 해당 Router에서 구현할 기능에 따라 적절한 MySQL 문법으로 작성된다. 또한 sql문 안에서는 ${변수} 형식을 통해 변수를 사용할 수 있다. conn 객체를 활용하여 sql문을 실행하면 기능 구현이 완료되고, 마지막으로 Router를 exports하며 끝맺는다.
+
+<h3>market.js</h3>
+
+```
+router.get('/:type/:var', (req, res) => {
+    if(req.params.type=='mkid'){
+        var sql = `select * from MARKET where id = ${req.params.var}`;
+
+        conn.query(sql, (err, rows) => {
+            if(err) {
+                throw err;
+            }
+            console.log(rows);
+            res.send(rows);
+        })
+    }
+});
+```
+
+5. 예시로 market.js를 살펴보겠다. 사용자가 입력한 첫번째 정보는 req.params.type에, 두번째 정보는 req.params.var에 저장된다. marketID를 조회하기 위한 목적으로 판단되면(mkid 입력되어야 함), if문 블록 속의 내용을 실행한다. sql문은 select문으로 req.params.var의 정보와 id 값이 같은 매장의 정보를 조회하는 것이다. 이를 실행한 후, 사용자가 입력한 값에 맞는 id를 가진 매장이 존재한다면 해당 정보가 뜰 것이다.
+
+<h1>How to Build</h1>
 
 사용 방법 넣고~
 AWS 주소~
 
 
-     . Source code에 대한 설명 / How to build / How to install / How to test 
-     . Database or data used / list of open sources used / 설치 스크립트 / 데이터
+     . How to build / How to install / How to test 
