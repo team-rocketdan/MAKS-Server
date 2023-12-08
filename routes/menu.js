@@ -8,7 +8,7 @@ router.get('/:type/:var', (req, res) => { // ID에 따른 메뉴 조회
     console.log(req.params.var);
 
     if(req.params.type=='mkid'){ // 가게
-        var sql = `select * from MENU where MK_ID = ${req.params.var}`;
+        var sql = `select * from MENU where marketID = ${req.params.var}`; // MARKET ID
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
@@ -17,7 +17,7 @@ router.get('/:type/:var', (req, res) => { // ID에 따른 메뉴 조회
             res.send(rows);
         });
     } else if(req.params.type=='nuid'){ // 메뉴
-        var sql = `select * from MENU where NU_ID = ${req.params.var}`;
+        var sql = `select * from MENU where id = ${req.params.var}`; // MENU ID
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;

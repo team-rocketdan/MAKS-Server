@@ -9,7 +9,7 @@ router.get('/:type/:var', (req, res) => {
     console.log(req.params.var);
 
     if(req.params.type=='mkid'){ // 마켓 ID로 가게 조회
-        var sql = `select * from MARKET where MK_ID = ${req.params.var}`;
+        var sql = `select * from MARKET where id = ${req.params.var}`; // ID
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
@@ -18,7 +18,7 @@ router.get('/:type/:var', (req, res) => {
             res.send(rows);
         })
     } else if(req.params.type=='name'){ // 이름에 단어 포함된 마켓 조회
-        var sql = `select * from MARKET where NAME like '%${req.params.var}%'`;
+        var sql = `select * from MARKET where name like '%${req.params.var}%'`; // NAME
         conn.query(sql, (err, rows) => {
             if(err) {
                 throw err;
