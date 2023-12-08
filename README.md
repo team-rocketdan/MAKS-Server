@@ -2,7 +2,7 @@
 
 * Amazon RDS Instance와 MySQL Server를 연결한다.     
 * MySQL Workbench Connection 내에서 SQL 쿼리를 작성하여 Database를 설계한다.
-* 자세한 방법은 https://melody2108-20.tistory.com/3 를 참고한다.
+* 자세한 방법은 https://melody2108-20.tistory.com/3 의 첫번째, 두번째 파트를 참고한다.
 * 이하는 필자가 설계한 Database의 Table 목록이다.
  
 <h3>USER</h3>
@@ -171,10 +171,12 @@ router.get('/:type/:var', (req, res) => {
 
 5. 예시로 market.js를 살펴보겠다. 사용자가 입력한 첫번째 정보는 req.params.type에, 두번째 정보는 req.params.var에 저장된다. marketID를 조회하기 위한 목적으로 판단되면(mkid 입력되어야 함), if문 블록 속의 내용을 실행한다. sql문은 select문으로 req.params.var의 정보와 id 값이 같은 매장의 정보를 조회하는 것이다. 이를 실행한 후, 사용자가 입력한 값에 맞는 id를 가진 매장이 존재한다면 해당 정보가 뜰 것이다.
 
-<h1>How to Build</h1>
+<h1>How to Test</h1>
+
+* Amazon EC2에 서버를 배포하여 Data 및 사용자 입력이 잘 반영되는지 테스트한다.
+* 특정 운영체제 및 애플리케이션을 실행하는 독립적인 환경인 인스턴스를 이용한다.
+* 자세한 방법은 https://melody2108-20.tistory.com/3 의 <Amazon EC2에 서버 배포> 파트를 참고한다.
+
 
 사용 방법 넣고~
 AWS 주소~
-
-
-     . How to build / How to install / How to test 
