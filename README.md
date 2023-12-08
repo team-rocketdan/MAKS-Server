@@ -108,4 +108,4 @@ AWS 주소~
 
 
      . Source code에 대한 설명 / How to build / How to install / How to test 
-     . Database or data used / list of open sources used
+     . Database or data used / list of open sources used / 설치 스크립트 / 데이터
