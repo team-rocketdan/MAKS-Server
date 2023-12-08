@@ -2,8 +2,8 @@
 
 * Amazon RDS Instance와 MySQL Server를 연결한다.     
 * MySQL Workbench Connection 내에서 SQL 쿼리를 작성하여 Database를 설계한다.
-* 자세한 방법은 https://melody2108-20.tistory.com/3 링크를 참고한다.
-* 아래는 필자가 설계한 Database의 Table 목록이다.
+* 자세한 방법은 https://melody2108-20.tistory.com/3 를 참고한다.
+* 이하는 필자가 설계한 Database의 Table 목록이다.
  
 <h2>USER</h2>
 
@@ -14,10 +14,10 @@
 
 >  id -- VARCHAR(20) >> PRIMARY KEY    
 >  name -- VARCHAR(200)     
->  email -- VARCHAR(40)       
+>  email -- VARCHAR(40)        
 >  loginCenter -- VARCHAR(10)       
 >  profileImage -- VARCHAR(200)      
->  createdAt -- DATETIME     
+>  createdAt -- DATETIME << DEFAULT = 생성 시각      
 
 <h2>MANAGER</h2>
 
@@ -42,7 +42,7 @@
 >  name --  VARCHAR(200)     
 >  coverImage -- VARCHAR(200)    
 >  coordinate -- POINT       
->  status -- VARCHAR(10)   
+>  status -- VARCHAR(10) << DEFAULT = 'ing'   
 
 <h2>MENU</h2>
 
@@ -67,16 +67,16 @@
 |id|userID|marketID|createdAt|menus|totalPrice|isTakeout|status|
 |--|------|--------|---------|-----|----------|---------|------|
 |145203|heroes51|20031|2019-10-06 11:10:50|{"23540697": 2, "59113950": 2}|19600|1|end|
-|200364|tigers47|75690|2023-12-08 14:53:34|{"14003658": 3, "64100535": 1}|16500|0|ing|
+|200364|tigers47|75690|DEFAULT|{"14003658": 3, "64100535": 1}|16500|0|DEFAULT|
 
 >  id -- INT >> PRIMARY KEY      
 >  userID -- VARCHAR(20) >> FOREIGN KEY        
 >  marketID -- INT >> FOREIGN KEY        
->  createdAt -- DATETIME 
+>  createdAt -- DATETIME << DEFAULT = 생성 시각        
 >  menus -- JSON      
 >  totalPrice -- INT  
 >  isTakeout -- TINYINT     
->  status -- VARCHAR(10)    
+>  status -- VARCHAR(10) << DEFAULT = 'ing'    
 
 <h1>Source Code</h1>
 
@@ -85,26 +85,72 @@
 ```
 module.exports = {
     host: 'maks-database.cqfnpacnwfir.ap-northeast-2.rds.amazonaws.com',
-    user: 'user',
-    password: 'password',
-    database: 'database'
+    user: 'melody2108',
+    password: '162071049',
+    database: 'maksDB'
 };
 ```
 
-* host? 사용자가 이용한 Amazon RDS Instance의 엔드포인트
-* user? 사용자가 설정한 이름
-* password? 사용자가 설정한 비밀번호
-* database? 사용자가 설계한 Database의 이름
+* host? 필자가 이용한 Amazon RDS Instance의 엔드포인트
+* user? 필자가 이전 단계에서 설정한 사용자 이름
+* password? 필자가 이전 단계에서 설정한 비밀번호
+* database? 필자가 이전 단계에서 설계한 Database의 이름
+
+<h3>app.js</h3>
 
 ```
+const express = require('express');
+const mysql = require('mysql');
+const dbInfo = require('./config/database.js');
+var conn = mysql.createConnection(dbInfo);
+```
+
+1. 필자는 Node.js를 위한 웹 애플리케이션 프레임워크인 Express.js를 사용하였고, 이는 require 함수로 필요한 모듈을 불러와 이용한다. 이전 단계에서 설계한 MySQL Database를 활용하기 위해 database.js에서 설정했던 호스트, 사용자, 비밀번호, 데이터베이스명에 대한 정보를 포함한 database.js 모듈을 불러와 dbInfo 변수에 저장한다. 이를 이용해 MySQL과의 커넥션을 생성하면 해당 Database 사용이 가능하다.
 
 ```
+var userRouter = require('./routes/user.js');
+var marketRouter = require('./routes/market.js');
+var menuRouter = require('./routes/menu.js');
+var orderRouter = require('./routes/orders');
+
+app.use('/user', userRouter);
+app.use('/market', marketRouter);
+app.use('/menu', menuRouter);
+app.use('/orders', orderRouter);
+```
+
+2. Express.js는 HTTP 요청 메소드에 따라 다양한 엔드포인트에 대한 라우팅이 가능한데, 필자는 여러 라우팅을 하나의 모듈로 구조화하는 Router 객체를 사용하였다. 메인 파일인 app.js에서는 라우터 모듈을 불러와 변수에 저장한 후 사용하고, Router를 exports하는 파일에서 실질적인 기능을 구현한다. 위의 소스 코드를 예시로 들자면, user에 관한 실질적인 기능은 app.js 파일이 아닌 user.js 파일에 구현되는 것이다.
+
+<h3>routes/---.js</h3>
+
+```
+const express = require('express');
+const mysql = require('mysql');
+const dbInfo = require('../config/database.js');
+var conn = mysql.createConnection(dbInfo);
+var router = express.Router();
+
+router.get('/:type/:var', (req, res) => {
+    if(req.params.type == '---'){
+        var sql = `select * from --- where --- = ${req.params.var}`;
+
+        conn.query(sql, (err, rows) => {
+            if(err) {
+                throw err;
+            }
+            console.log(rows);
+            res.send(rows);
+        });
+    }
+});
+
+module.exports = router;
+```
+3. 필자는 routes 폴더 아래에서 Router를 exports하는 파일들을 모아 관리한다. 해당 파일들의 기본 구조는 위와 같고, app.js 파일에서처럼 필요한 모듈들을 require 함수로 불러와 사용한다. 중요한 것은 router.get 블록 속의 내용이다. /:--- 형식으로 사용자로부터 정보를 받으면 req.params 객체 아래에 변수로 저장되는데, 위에서는 /:type의 정보가 req.params.type 변수에 저장된 것이다.
+4. 이를 if문의 분기로 활용하거나 sql 문의 where 조건에서 사용한다. sql문은 ``(백틱)으로 선언되고, 해당 Router에서 구현할 기능에 따라 적절한 MySQL 문법으로 작성된다. 또한 sql문 안에서는 ${변수} 형식을 통해 변수를 사용할 수 있다. conn 객체를 활용하여 sql문을 실행하면 기능 구현이 완료되고, 마지막으로 Router를 exports하며 끝맺는다.
 
 사용 방법 넣고~
-
 AWS 주소~
-
-라우터~
 
 
      . Source code에 대한 설명 / How to build / How to install / How to test 
