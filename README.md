@@ -194,5 +194,5 @@ router.get('/:type/:var', (req, res) => {
 * Amazon EC2에 서버를 배포하여 Data 및 사용자 입력이 잘 반영되는지 테스트한다.
 * 특정 운영체제 및 애플리케이션을 실행하는 독립적인 환경인 인스턴스를 이용한다.
   + 필자는 ubuntu 환경에서 진행하였고, 깃허브와 연동하여 배포하였다.
-  + 인스턴스의 퍼블릭 IPv4 주소에서 조회 및 입력 등이 가능하다.
+  + 필자의 AWS 인스턴스 주소는 ec2-43-202-202-39.ap-northeast-2.compute.amazonaws.com이고, 3004번 port를 사용하였다.
 * 자세한 방법은 https://melody2108-20.tistory.com/3 의 <Amazon EC2에 서버 배포> 파트를 참고한다.
