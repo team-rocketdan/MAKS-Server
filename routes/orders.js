@@ -18,10 +18,13 @@ router.get('/:uid/:mkid', (req, res) => {
     for (i=0; i<req.query.ids.length; i++) {
         if (i=0) {
             var json = `{"${req.query.ids[0]}": ${req.query.counts[0]}}`;
-        } else {
-            var tempID = `${req.query.ids[i]}`;
+        } else if (i>0) {
+            var tempID = `"${req.query.ids[i]}"`;
             var tempCount = `${req.query.counts[i]}`;
 
+            console.log(tempID);
+            console.log(tempCount);
+            
             json.tempID = tempCount;
         }
     }
