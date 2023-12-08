@@ -9,10 +9,10 @@ router.get('/:uid/:mkid', (req, res) => {
     console.log(req.query.ids); // ["23540697":1,"64100526":3]
     console.log(req.query.counts);
 
+    oid=Math.floor(Math.random() * 1000001);
     uid=req.params.uid;
     mkid=req.params.mkid;
     price=req.query.price;
-    oid=Math.floor(Math.random() * 1000001);
     
     for (i=0; i<req.query.ids.length; i++) {
         if (i=0) {
@@ -23,10 +23,10 @@ router.get('/:uid/:mkid', (req, res) => {
         }
     }
     
-    var sql = `insert into ORDERS values (${oid}, json, ${price}, default, 0, 'ing', '${uid}', ${mkid})`
+    var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default, json, ${price}, 0, 'ing')`
 
-    /*var sql = `insert into ORDERS values (${oid}, 
-        '{"${req.query.ids[0]}": ${req.query.counts[0]}, "${req.query.ids[1]}": ${req.query.counts[1]}}', ${price}, default, 0, 'ing', '${uid}', ${mkid})`; */
+    /*var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default,
+        '{"${req.query.ids[0]}": ${req.query.counts[0]}, "${req.query.ids[1]}": ${req.query.counts[1]}}', ${price}, 0, 'ing')`; */
     
         conn.query(sql, (err, rows) => {
         if(err) {
