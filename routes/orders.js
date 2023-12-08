@@ -20,7 +20,7 @@ router.get('/:uid/:mkid', (req, res) => {
             const json = `{"${req.query.ids[0]}": ${req.query.counts[0]}}`;
         } else {
             json[`${req.query.ids[i]}`] = `${req.query.counts[i]}`;
-        }     
+        }
     }
     
     var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default, json, ${price}, 0, 'ing')`;
