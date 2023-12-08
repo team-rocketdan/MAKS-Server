@@ -5,7 +5,7 @@
 * 자세한 방법은 https://melody2108-20.tistory.com/3 를 참고한다.
 * 이하는 필자가 설계한 Database의 Table 목록이다.
  
-<h2>USER</h2>
+<h3>USER</h3>
 
 |id|name|email|loginCenter|profileImage|createdAt|
 |--|----|-----|-----------|------------|---------|
@@ -19,7 +19,7 @@
 >  profileImage -- VARCHAR(200)      
 >  createdAt -- DATETIME << DEFAULT = 생성 시각      
 
-<h2>MANAGER</h2>
+<h3>MANAGER</h3>
 
 |id|name|tel|businessNumber|
 |--|----|---|--------------|
@@ -31,7 +31,7 @@
 >  tel -- VARCHAR(20)        
 >  businessNumber -- VARCHAR(30)     
 
-<h2>MARKET</h2>
+<h3>MARKET</h3>
 
 |id|name|coverImage|coordinate|status|
 |--|----|----------|----------|------|
@@ -44,7 +44,7 @@
 >  coordinate -- POINT       
 >  status -- VARCHAR(10) << DEFAULT = 'ing'   
 
-<h2>MENU</h2>
+<h3>MENU</h3>
 
 |id|marketID|name|price|description|image|
 |--|--------|----|-----|-----------|-----|
@@ -62,7 +62,7 @@
 >  description -- VARCHAR(200)      
 >  image -- VARCHAR(200)          
 
-<h2>ORDERS</h2>
+<h3>ORDERS</h3>
 
 |id|userID|marketID|createdAt|menus|totalPrice|isTakeout|status|
 |--|------|--------|---------|-----|----------|---------|------|
