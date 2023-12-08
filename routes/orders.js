@@ -16,13 +16,14 @@ router.get('/:uid/:mkid', (req, res) => {
     price=req.query.price;
     
     for (i=0; i<req.query.ids.length; i++) {
-        if (i=0) {
+        /*if (i=0) {
             const json = `{"${req.query.ids[0]}": ${req.query.counts[0]}}`;
-            console.log(json);
-        } else {
-            json[`${req.query.ids[i]}`] = `${req.query.counts[i]}`;
-            console.log(json);
-        }
+            break;
+        }*/
+        const json = {};
+        json[`${req.query.ids[i]}`] = `${req.query.counts[i]}`;
+        console.log(json);
+        
     }
     
     var sql = `insert into ORDERS values (${oid}, '${uid}', ${mkid}, default, json, ${price}, 0, 'ing')`;
